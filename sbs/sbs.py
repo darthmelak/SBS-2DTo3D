@@ -319,7 +319,7 @@ def process_image_sbs_grid_sampling(device, base_image, depth_map, depth_scale, 
     # Convert back to [B, H, W*2, C] format for ComfyUI
     sbs_image_tensor = sbs.permute(0, 2, 3, 1)
     
-    return (sbs_image_tensor,)
+    return sbs_image_tensor
 
 
 # IMAGE - MSH WARPING
@@ -399,8 +399,8 @@ def process_image_sbs_mesh_warping(device, base_image, depth_map, depth_scale=30
 
     # Apply disparity to all batch items, not just the first one
     for b in range(B):
-        left_grid[b, ..., 0] -= eye_separation * disparity[b, 0]
-        right_grid[b, ..., 0] += eye_separation * disparity[b, 0]
+        left_grid[b, ..., 0] -= eye_separation * (disparity[b, 0])
+        right_grid[b, ..., 0] += eye_separation * (disparity[b, 0])
 
     # Convert to float32 for F.grid_sample operation (F.grid_sample expects floast32)
     # Permute base image for processing (BCHW shape)

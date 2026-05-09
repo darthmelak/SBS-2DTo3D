@@ -164,7 +164,7 @@ def process_image(model, image_path, output_dir, device, dtype, is_metric):
 
         # COLOR DEPTH MAP
         # Apply colormap (Spectral_r to match original implementation)
-        cmap = mpl.get_cmap('Spectral_r')
+        cmap = mpl.colormaps.get_cmap('Spectral_r')
         # cmap = cm.get_cmap('Spectral_r')
         colored_depth = cmap(depth_np)[:, :, :3]  # Remove alpha channel
         colored_depth = (colored_depth * 255).astype(np.uint8)
